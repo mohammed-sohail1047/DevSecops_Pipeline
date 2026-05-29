@@ -2,56 +2,88 @@
 
 ## Services
 
-### 1. Auth Service
+### 1. Patient Service
+Responsibilities:
+- Patient registration
+- Login API
+- Profile management
+
+APIs:
+- POST /register
+- POST /login
+- GET /profile/{id}
+
+---
+
+### 2. Auth Service
 - Patient registration
 - Patient login
 
-### APIs
+APIs:
 - POST /auth/register
 - POST /auth/login
 
 ---
 
-### 2. Appointment Service
+### 3. Doctor Appointment Service
+Responsibilities:
+- List doctors
 - Book appointment
-- View appointment history
 - Cancel appointment
-- Prevent double booking
+- Appointment history
 
-### APIs
-- POST /appointments/book
-- GET /appointments/history
-- PUT /appointments/cancel/{id}
+APIs:
+- GET /doctors
+- POST /appointments
+- DELETE /appointments/{id}
+- GET /appointments/{patientId}
+
+Sample Appointment Payload:
+```json
+{
+  "patientId": "101",
+  "doctorName": "Dr Sharma",
+  "specialization": "Cardiology",
+  "appointmentDate": "2026-06-01",
+  "time": "11:30 AM"
+}
+```
 
 ---
 
-### 3. Report Service
-- Upload medical reports
-- List reports
-- Download reports
+### 4. Medical Report Service
+Responsibilities:
+- Upload patient reports
+- Store reports in AWS S3
+- Generate report download URL
+- View uploaded reports
 
-### APIs
-- POST /reports/upload
-- GET /reports/list
-- GET /reports/download/{filename}
+APIs:
+- POST /upload-report
+- GET /reports/{patientId}
+
+Important:
+- Uses AWS S3 for storage
+- Uses `boto3` for AWS SDK integration
+- Requires `S3_BUCKET_NAME`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION`
 
 ---
 
 ## Tech Stack
 - Python
 - FastAPI
-- REST APIs
+- SQLAlchemy
+- boto3
 
 ---
 
 ## Run Project
 
-### Appointment Service
-uvicorn main:app --reload --port 8000
-
-### Auth Service
+### Patient Service
 uvicorn main:app --reload --port 8001
 
+### Appointment Service
+uvicorn main:app --reload --port 8000
 
 ### Report Service
 uvicorn main:app --reload --port 8002
