@@ -56,3 +56,11 @@ def download_report(filename: str):
     return {
         "message": "File not found"
     }
+
+@app.get("/reports/patient/{patient_id}")
+def get_patient_reports(patient_id: int):
+
+    return {
+        "patient_id": patient_id,
+        "reports": os.listdir(UPLOAD_FOLDER)
+    }

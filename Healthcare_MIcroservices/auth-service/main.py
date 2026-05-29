@@ -16,3 +16,13 @@ def register():
 @app.post("/auth/login")
 def login():
     return {"token": "jwt-token"}
+
+
+@app.get("/profile/{id}")
+def get_profile(id: int):
+
+    return {
+        "id": id,
+        "name": "XYZ",
+        "email": "xyz@example.com"
+    }
