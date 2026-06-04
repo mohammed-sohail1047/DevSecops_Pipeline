@@ -9,7 +9,7 @@ class DoctorOut(BaseModel):
 
 
 class AppointmentCreate(BaseModel):
-    patientId: str
+    patientId: int | str
     doctorName: str
     specialization: str
     appointmentDate: str
