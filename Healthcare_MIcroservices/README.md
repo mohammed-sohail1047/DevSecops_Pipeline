@@ -214,7 +214,7 @@ allowing traceability across microservices.
 
 ## Database
 
-* SQLite
+* PostgreSQL / MySQL
 * SQLAlchemy ORM
 
 ## Cloud Storage
